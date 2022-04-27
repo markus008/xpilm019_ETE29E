@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="employees">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="employee" maxOccurs="unbounded" minOccurs="1"> </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="employee">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:integer" name="id"/>
+                <xs:element type="xs:string" name="first_name"/>
+                <xs:element type="xs:string" name="last_name"/>
+                <xs:element type="emailTyp" name="email"/>
+                <xs:element type="genderTyp" name="gender"/>
+                <xs:element type="xs:date" name="dob"/>
+                <xs:element type="xs:string" name="city"/>
+                <xs:element type="xs:string" name="company"/>
+                <xs:element name="phone_numbers" type="phone_numbers_type"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType name="phone_numbers_type">
+        <xs:sequence>
+            <xs:element name="number" maxOccurs="unbounded" minOccurs="0"> </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:element name="number">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:byte" name="id"/>
+                <xs:element type="phoneTyp" name="phone"/>
+                <xs:element type="typTyp" name="typ"/>
+                <xs:element name="call_history" type="call_history_type"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="call_history_type">
+        <xs:sequence>
+            <xs:element name="call" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="call">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:date" name="date"/>
+                <xs:element type="xs:string" name="time"/>
+                <xs:element type="xs:string" name="call_length"/>
+                <xs:element type="xs:int" name="to_number"/>
+                <xs:element type="roamingTyp" name="roming"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:simpleType name="typTyp">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="IOS"/>
+            <xs:enumeration value="Android"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="genderTyp">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Female"/>
+            <xs:enumeration value="Male"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="roamingTyp">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="true"/>
+            <xs:enumeration value="false"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="phoneTyp">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="\d{9}"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="emailTyp">
+        <xs:restriction base="xs:string">
+            <xs:pattern value=".*@.*"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    
+</xs:schema>
